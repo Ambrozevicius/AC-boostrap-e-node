@@ -1,6 +1,7 @@
 const express = require('express');
 const fs = require('fs');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -10,8 +11,13 @@ app.use(bodyParser.json());
 
 const articlesFile = './articles.json';
 
+
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/artigo', (req, res) => {
+    res.sendFile(__dirname + '/articles.json');
 });
 
 app.get('/add', (req, res) => {
@@ -22,7 +28,7 @@ app.post('/add', (req, res) => {
     const newArticle = {
         title: req.body.title,
         content: req.body.content,
-        category: req.body.category // Adicionando a categoria ao objeto do artigo
+        category: req.body.category
     };
 
     fs.readFile(articlesFile, (err, data) => {
@@ -46,21 +52,34 @@ app.post('/add', (req, res) => {
     });
 });
 
-app.get('/filter', (req, res) => {
-    res.sendFile(__dirname + '/filter.html');
-});
 
-app.get('/articles', (req, res) => {
-    fs.readFile(articlesFile, (err, data) => {
-        if (err) {
-            console.error('Erro ao ler arquivo de artigos:', err);
-            res.status(500).send('Erro ao buscar artigos.');
-            return;
-        }
-        const articles = JSON.parse(data);
-        res.send(articles);
-    });
-});
+const articlesPath = path.join(__dirname, 'articles.json');
+ 
+const articlesData = fs.readFileSync(articlesPath, 'utf-8');
+const articles = JSON.parse(articlesData);
+
+function buscarArtigoPorCategoria(category) {
+ 
+    return articles.find(articles =>
+        articles.category.toLowerCase() === category.toLowerCase());
+}
+
+
+app.get('/buscar-categoria/:category', (req, res) => {
+ 
+    const categoriaDoArtigoBuscado = req.params.category;
+ 
+    const artigoEncontrado = buscarArtigoPorCategoria(categoriaDoArtigoBuscado);
+ 
+    if (artigoEncontrado) {
+ 
+        res.send(`<h1>Artigo encontrado:</h1><pre>
+    ${JSON.stringify(artigoEncontrado, null, 2)}</pre>`)
+    } else {
+        res.send('<h1>Artigo não encontrado.</h1>')
+    }
+})
+
 
 app.listen(port, () => {
     console.log(`Servidor rodando em http://localhost:${port}`);

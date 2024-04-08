@@ -5,13 +5,13 @@
     "category": "fisica"
   },
   {
-    "title": "",
-    "content": "",
-    "category": "quimica"
-  },
-  {
     "title": "Explorando os Mistérios da Epigenética: Implicações para a Saúde e a Evolução",
     "content": "A epigenética, o estudo das modificações reversíveis no DNA que afetam a expressão gênica sem alterar a sequência de nucleotídeos, tem sido objeto de intensa pesquisa nas últimas décadas. Este artigo revisa os avanços recentes na compreensão dos mecanismos epigenéticos e seu papel na regulação do desenvolvimento, da saúde e da evolução. Aborda-se a influência de fatores ambientais, como dieta, estresse e exposição a toxinas, na modificação dos padrões epigenéticos e seu impacto na suscetibilidade a doenças complexas, como câncer e distúrbios metabólicos. Além disso, discute-se o papel da epigenética na evolução biológica, destacando sua contribuição para a adaptação das espécies a novos ambientes e condições ambientais em rápida mudança.",
     "category": "biologia"
+  },
+  {
+    "title": "importância da química",
+    "content": "Do ponto de vista científico, a Química é importante para entendermos melhor o Universo em que vivemos e as transformações que ocorrem a todo instante.",
+    "category": "quimica"
   }
 ]
