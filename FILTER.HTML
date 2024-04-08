@@ -9,7 +9,17 @@
 <body>
     <div class="container mt-5">
         <h1>Filtrar Artigos</h1>
-
+        <form action="/filter" method="get">
+            <div class="form-group">
+                <label for="category">Escolha a Matéria:</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="fisica">Física</option>
+                    <option value="quimica">Química</option>
+                    <option value="biologia">Biologia</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
     </div>
 </body>
 </html>

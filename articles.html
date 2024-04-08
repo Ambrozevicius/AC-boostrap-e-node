@@ -9,7 +9,38 @@
 <body>
     <div class="container mt-5">
         <h1>Ver Todos os Artigos</h1>
-
+        <div id="articles-list"></div> <!-- Div para exibir a lista de artigos -->
     </div>
+
+    <script>
+        // Função para carregar e exibir todos os artigos
+        async function loadAllArticles() {
+            const response = await fetch('/articles'); // Envia uma solicitação GET para a rota /articles
+            const articles = await response.json(); // Converte a resposta em JSON
+            const articlesListDiv = document.getElementById('articles-list'); // Obtém a div para exibir os artigos
+
+            // Limpa a div de lista de artigos
+            articlesListDiv.innerHTML = '';
+
+            // Itera sobre cada artigo e adiciona-o à lista
+            articles.forEach(article => {
+                const articleDiv = document.createElement('div');
+                articleDiv.classList.add('article');
+                articleDiv.innerHTML = `
+                    <h3>${article.title}</h3>
+                    <p><strong>Categoria:</strong> ${article.category}</p>
+                    <p>${article.content}</p>
+                    <hr>
+                `;
+                articlesListDiv.appendChild(articleDiv);
+                // Adiciona duas quebras de linha após cada artigo
+                articlesListDiv.appendChild(document.createElement('br'));
+                articlesListDiv.appendChild(document.createElement('br'));
+            });
+        }
+
+        // Chama a função para carregar e exibir todos os artigos quando a página é carregada
+        window.onload = loadAllArticles;
+    </script>
 </body>
 </html>
